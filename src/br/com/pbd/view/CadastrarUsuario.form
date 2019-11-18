@@ -165,7 +165,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel5" min="-2" pref="81" max="-2" attributes="0"/>
-                                          <Component id="Complemento" min="-2" pref="142" max="-2" attributes="0"/>
+                                          <Component id="JTextFieldComplemento" min="-2" pref="142" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -257,7 +257,7 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextFieldNumero" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="Complemento" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="JTextFieldComplemento" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jTextFieldEstado" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jTextFieldBairro" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jTextFieldCidade" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -365,9 +365,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldEstadoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="Complemento">
+        <Component class="javax.swing.JTextField" name="JTextFieldComplemento">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComplementoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTextFieldComplementoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldBairro">

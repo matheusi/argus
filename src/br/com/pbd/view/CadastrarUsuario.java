@@ -1,13 +1,18 @@
 package br.com.pbd.view;
 
+import br.com.pbd.app.App;
 import br.com.pbd.gui.JPassWordFieldHint;
 import java.awt.Color;
 import br.com.pbd.gui.JTextFieldHint;
+import br.com.pbd.models.beans.Endereco;
 import br.com.pbd.models.beans.Usuario;
 import br.com.pbd.models.fachada.CoreFachada;
 import br.com.pbd.util.Criptografar;
 import java.awt.Point;
 import static java.lang.Thread.sleep;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +44,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jTextFieldNumero = new javax.swing.JTextField();
         jTextFieldLogradouro = new javax.swing.JTextField();
         jTextFieldEstado = new javax.swing.JTextField();
-        Complemento = new javax.swing.JTextField();
+        JTextFieldComplemento = new javax.swing.JTextField();
         jTextFieldBairro = new javax.swing.JTextField();
         jTextFieldCidade = new javax.swing.JTextField();
         jTextFieldCep = new javax.swing.JTextField();
@@ -181,9 +186,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        Complemento.addActionListener(new java.awt.event.ActionListener() {
+        JTextFieldComplemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComplementoActionPerformed(evt);
+                JTextFieldComplementoActionPerformed(evt);
             }
         });
 
@@ -342,7 +347,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Complemento, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(JTextFieldComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -412,7 +417,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Complemento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTextFieldComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -498,7 +503,27 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         novoUsuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
         novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
         novoUsuario.setTipo((String)jComboBoxTipo.getSelectedItem());
-
+        novoUsuario.setCpf(jTextFieldCPF.getText());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+        try {
+            Date data = formato.parse(jTextFieldDataNascimento.getText());
+            novoUsuario.setData_nascimento(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Endereco endereco = new Endereco();
+        endereco.setLogradouro(jTextFieldLogradouro.getText());
+        endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
+        endereco.setBairro(jTextFieldBairro.getText());
+        endereco.setCidade(jTextFieldCidade.getText());
+        endereco.setEstado(jTextFieldEstado.getText());
+        endereco.setCep(jTextFieldCPF.getText());
+        endereco.setComplemento(JTextFieldComplemento.getText());
+        
+        fachada.SalvarEndereco(endereco);
+        novoUsuario.setEndereco(endereco);
+        
         fachada.SalvarUsuario(novoUsuario);
         jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
         
@@ -517,9 +542,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldEstadoActionPerformed
 
-    private void ComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComplementoActionPerformed
+    private void JTextFieldComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldComplementoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComplementoActionPerformed
+    }//GEN-LAST:event_JTextFieldComplementoActionPerformed
 
     private void jTextFieldBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBairroActionPerformed
         // TODO add your handling code here:
@@ -594,8 +619,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Complemento;
     private javax.swing.JTable JTableFiliais;
+    private javax.swing.JTextField JTextFieldComplemento;
     private javax.swing.JButton jButtonEntrar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox jComboBoxTipo;

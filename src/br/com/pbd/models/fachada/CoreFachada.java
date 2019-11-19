@@ -39,4 +39,9 @@ public class CoreFachada implements IcoreFachada{
     public void SalvarEndereco(Endereco endereco) {
         enderecoBusiness.Salvar(endereco);
     }
+
+    @Override
+    public List<Usuario> getTodosUsuarios() {
+        return usuarioBusiness.getTodosUsuarios();
+    }
 }

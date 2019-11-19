@@ -8,8 +8,9 @@ public interface IcoreFachada {
     
     public List<Usuario> ValidarLogin(String login, String senha);
     
-    //FUNCIONARIO
+    //USUARIO
     public void SalvarUsuario(Usuario usuario);
+    public List<Usuario> getTodosUsuarios();
     
     //ENDERECO
      public void SalvarEndereco(Endereco endereco);

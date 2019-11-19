@@ -4,6 +4,7 @@ import br.com.pbd.models.beans.Usuario;
 import br.com.pbd.models.dao.IcoreUsuarioDAO;
 import br.com.pbd.models.dao.UsuarioDAO;
 import br.com.pbd.util.Conexao;
+import java.util.List;
 
 public class UsuarioBusiness implements IcoreUsuarioBusiness{
     
@@ -16,5 +17,10 @@ public class UsuarioBusiness implements IcoreUsuarioBusiness{
     @Override
     public void Salvar(Usuario usuario){
         usuarioDao.Salvar(usuario);
+    }
+
+    @Override
+    public List<Usuario> getTodosUsuarios() {
+        return usuarioDao.getTodosUsuarios();
     }
 }

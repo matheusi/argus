@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 
@@ -56,4 +57,23 @@ public class UsuarioDAO implements IcoreUsuarioDAO, Serializable {
             em.close();
         }
     }
+
+    @Override
+    public List<Usuario> getUsuarioPorNome(String nome) {
+        EntityManager em = getEntityManager();
+        List<Usuario> usuarios = null;
+      try{
+        String consulta = "select f from Usuario f where f.nome like :nome";
+        TypedQuery<Usuario> query = em.createQuery(consulta,Usuario.class);
+        query.setParameter("nome","%" + nome + "%");
+        usuarios = query.getResultList();
+        
+      }catch (Exception e){
+          e.printStackTrace();
+      }finally{
+          em.close();
+      }
+        return usuarios;
+    }
+    
 }

@@ -8,4 +8,6 @@ public interface IcoreUsuarioDAO {
     public void Salvar(Usuario funcionario);
     
     public List<Usuario> getTodosUsuarios();
+    
+    public List<Usuario> getUsuarioPorNome(String nome);
 }

@@ -7,6 +7,7 @@ import br.com.pbd.gui.JTextFieldHint;
 import br.com.pbd.models.beans.Endereco;
 import br.com.pbd.models.beans.Usuario;
 import br.com.pbd.models.business.ModeloTabela;
+import br.com.pbd.models.dao.exceptions.NonexistentEntityException;
 import br.com.pbd.models.fachada.CoreFachada;
 import br.com.pbd.util.Criptografar;
 import java.awt.Point;
@@ -76,6 +77,11 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableFiliais = new javax.swing.JTable();
         jTextFieldPesquisa = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jComboBoxTipoPesquisa = new javax.swing.JComboBox();
+        jLabel17 = new javax.swing.JLabel();
+        jButtonEditar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("System32");
@@ -215,19 +221,19 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Logradouro");
+        jLabel3.setText("Logradouro*");
 
-        jLabel4.setText("Número");
+        jLabel4.setText("Número*");
 
         jLabel5.setText("Complemento");
 
-        jLabel6.setText("Cidade");
+        jLabel6.setText("Cidade*");
 
-        jLabel7.setText("Bairro");
+        jLabel7.setText("Bairro*");
 
-        jLabel8.setText("CEP");
+        jLabel8.setText("CEP*");
 
-        jLabel9.setText("Estado");
+        jLabel9.setText("Estado*");
 
         jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,17 +271,17 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Login");
+        jLabel10.setText("Login*");
 
-        jLabel11.setText("Senha");
+        jLabel11.setText("Senha*");
 
-        jLabel12.setText("Nome");
+        jLabel12.setText("Nome*");
 
-        jLabel13.setText("Data Nascimento");
+        jLabel13.setText("Data Nascimento*");
 
-        jLabel14.setText("Naturalidade");
+        jLabel14.setText("Naturalidade*");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aluno", "Administrador", "Secretário", "Diretor", "Pedagogo" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Secretário", "Diretor", "Pedagogo" }));
         jComboBoxTipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxTipoMouseClicked(evt);
@@ -287,7 +293,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setText("CPF");
+        jLabel15.setText("CPF*");
 
         jScrollPane1.setBackground(new java.awt.Color(194, 215, 230));
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -309,20 +315,79 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 jTextFieldPesquisaActionPerformed(evt);
             }
         });
+        jTextFieldPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisaKeyReleased(evt);
+            }
+        });
+
+        jLabel16.setText("Pesquisar");
+
+        jComboBoxTipoPesquisa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nome" }));
+        jComboBoxTipoPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxTipoPesquisaMouseClicked(evt);
+            }
+        });
+        jComboBoxTipoPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoPesquisaActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setText("Pesquisar por:");
+
+        jButtonEditar.setBackground(new java.awt.Color(58, 65, 84));
+        jButtonEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonEditar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonEditar.setText("Editar");
+        jButtonEditar.setBorderPainted(false);
+        jButtonEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonEditar.setFocusPainted(false);
+        jButtonEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonEditarMouseExited(evt);
+            }
+        });
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluir.setBackground(new java.awt.Color(58, 65, 84));
+        jButtonExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.setBorderPainted(false);
+        jButtonExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonExcluir.setFocusPainted(false);
+        jButtonExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonExcluirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonExcluirMouseExited(evt);
+            }
+        });
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabelNotificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(30, Short.MAX_VALUE)
+                        .addGap(0, 20, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -380,11 +445,27 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jComboBoxTipoPesquisa, 0, 109, Short.MAX_VALUE)
+                                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)
-                                .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelNotificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -439,13 +520,22 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldCep, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel17))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTipoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelNotificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -513,37 +603,62 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        Usuario novoUsuario = new Usuario();
-        novoUsuario.setNome(jTextFieldNome.getText());
-        novoUsuario.setLogin(jTextFieldLogin.getText());
-        novoUsuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
-        novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
-        novoUsuario.setTipo((String)jComboBoxTipo.getSelectedItem());
-        novoUsuario.setCpf(jTextFieldCPF.getText());
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-        try {
-            Date data = formato.parse(jTextFieldDataNascimento.getText());
-            novoUsuario.setData_nascimento(data);
-        } catch (ParseException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if(jTextFieldNome.getText() != "" && jTextFieldDataNascimento.getText() != "" && jTextFieldNaturalidade.getText() != "" &&
+                jTextFieldCPF.getText() != "" && jTextFieldLogin.getText() != "" && jTextFieldSenha.getText() != "" &&
+                jTextFieldLogradouro.getText() != "" && jTextFieldNumero.getText() != "" && jTextFieldBairro.getText() != "" &&
+                jTextFieldCidade.getText() != "" && jTextFieldCep.getText() != "" && jTextFieldEstado.getText() != ""){
+            System.out.println("CAMPOS PREENCHIDOS");
+            
         }
+            
         
-        Endereco endereco = new Endereco();
-        endereco.setLogradouro(jTextFieldLogradouro.getText());
-        endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
-        endereco.setBairro(jTextFieldBairro.getText());
-        endereco.setCidade(jTextFieldCidade.getText());
-        endereco.setEstado(jTextFieldEstado.getText());
-        endereco.setCep(jTextFieldCPF.getText());
-        endereco.setComplemento(JTextFieldComplemento.getText());
         
-        fachada.SalvarEndereco(endereco);
-        novoUsuario.setEndereco(endereco);
         
-        fachada.SalvarUsuario(novoUsuario);
-        jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
         
-        preencherTabela();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        Usuario novoUsuario = new Usuario();
+//        novoUsuario.setNome(jTextFieldNome.getText());
+//        novoUsuario.setLogin(jTextFieldLogin.getText());
+//        novoUsuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
+//        novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
+//        novoUsuario.setTipo((String)jComboBoxTipo.getSelectedItem());
+//        novoUsuario.setCpf(jTextFieldCPF.getText());
+//        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+//        try {
+//            Date data = formato.parse(jTextFieldDataNascimento.getText());
+//            novoUsuario.setData_nascimento(data);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        Endereco endereco = new Endereco();
+//        endereco.setLogradouro(jTextFieldLogradouro.getText());
+//        endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
+//        endereco.setBairro(jTextFieldBairro.getText());
+//        endereco.setCidade(jTextFieldCidade.getText());
+//        endereco.setEstado(jTextFieldEstado.getText());
+//        endereco.setCep(jTextFieldCPF.getText());
+//        endereco.setComplemento(JTextFieldComplemento.getText());
+//        
+//        fachada.SalvarEndereco(endereco);
+//        novoUsuario.setEndereco(endereco);
+//        
+//        fachada.SalvarUsuario(novoUsuario);
+//        jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
+//        
+//        preencherTabela();
         
         
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -620,6 +735,48 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private void jComboBoxTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoMouseClicked
         camposLiberados();
     }//GEN-LAST:event_jComboBoxTipoMouseClicked
+
+    private void jComboBoxTipoPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoPesquisaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoPesquisaMouseClicked
+
+    private void jComboBoxTipoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxTipoPesquisaActionPerformed
+
+    private void jTextFieldPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaKeyReleased
+        if(jComboBoxTipoPesquisa.getSelectedItem().equals("Nome"))
+            preencherTabela(jTextFieldPesquisa.getText());
+
+    }//GEN-LAST:event_jTextFieldPesquisaKeyReleased
+
+    private void jButtonEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditarMouseEntered
+        jButtonEditar.setBackground(new Color(235,235,235));
+        jButtonEditar.setForeground(new Color(58, 65, 84));
+    }//GEN-LAST:event_jButtonEditarMouseEntered
+
+    private void jButtonEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditarMouseExited
+        jButtonEditar.setBackground(new Color(58,65,84));
+        jButtonEditar.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jButtonEditarMouseExited
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jButtonExcluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExcluirMouseEntered
+        jButtonExcluir.setBackground(new Color(235,235,235));
+        jButtonExcluir.setForeground(new Color(58, 65, 84));
+    }//GEN-LAST:event_jButtonExcluirMouseEntered
+
+    private void jButtonExcluirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExcluirMouseExited
+        jButtonExcluir.setBackground(new Color(58,65,84));
+        jButtonExcluir.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jButtonExcluirMouseExited
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
     
 
     public void loginInvalido(){
@@ -674,23 +831,56 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         JTableFiliais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
+        public void preencherTabela(String nome){
+        List<Usuario> usuarios = new ArrayList<>();
+        ArrayList dados = new ArrayList();
+        String[] coluna = new String[]{"ID","TIPO","NOME","CPF","LOGIN","LOGRADOURO"};
+        
+        usuarios = fachada.getUsuarioPorNome(nome);
+
+        for (Usuario usua : usuarios){
+            dados.add(new Object[]{usua.getId(), usua.getTipo(), usua.getNome(), usua.getCpf(), usua.getLogin(), usua.getEndereco().getLogradouro()});
+        }
+        
+        ModeloTabela modelo = new ModeloTabela(dados, coluna);
+        JTableFiliais.setModel(modelo);
+        JTableFiliais.getColumnModel().getColumn(0).setPreferredWidth(45);
+        JTableFiliais.getColumnModel().getColumn(0).setResizable(false);
+        JTableFiliais.getColumnModel().getColumn(1).setPreferredWidth(225);
+        JTableFiliais.getColumnModel().getColumn(1).setResizable(false);
+        JTableFiliais.getColumnModel().getColumn(2).setPreferredWidth(225);
+        JTableFiliais.getColumnModel().getColumn(2).setResizable(false);
+        JTableFiliais.getColumnModel().getColumn(3).setPreferredWidth(220);
+        JTableFiliais.getColumnModel().getColumn(3).setResizable(false);
+        JTableFiliais.getColumnModel().getColumn(4).setPreferredWidth(162);
+        JTableFiliais.getColumnModel().getColumn(4).setResizable(false);
+        JTableFiliais.getColumnModel().getColumn(5).setPreferredWidth(232);
+        JTableFiliais.getColumnModel().getColumn(5).setResizable(false);
+        JTableFiliais.getTableHeader().setReorderingAllowed(false);
+        JTableFiliais.setAutoResizeMode(JTableFiliais.AUTO_RESIZE_OFF);
+        JTableFiliais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+    
     public void camposLiberados(){
-        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
-            jTextFieldLogin.setEnabled(false);
-            jTextFieldSenha.setEnabled(false);
-        }
-        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
-            jTextFieldLogin.setEnabled(false);
-            jTextFieldSenha.setEnabled(false);
-        }
+//        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
+//            jTextFieldLogin.setEnabled(false);
+//            jTextFieldSenha.setEnabled(false);
+//        }
+//        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
+//            jTextFieldLogin.setEnabled(false);
+//            jTextFieldSenha.setEnabled(false);
+//        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JTableFiliais;
     private javax.swing.JTextField JTextFieldComplemento;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboBoxTipo;
+    private javax.swing.JComboBox jComboBoxTipoPesquisa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -698,6 +888,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

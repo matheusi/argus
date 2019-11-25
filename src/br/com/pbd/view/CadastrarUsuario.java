@@ -1,9 +1,7 @@
 package br.com.pbd.view;
 
 import br.com.pbd.app.App;
-import br.com.pbd.gui.JPassWordFieldHint;
 import java.awt.Color;
-import br.com.pbd.gui.JTextFieldHint;
 import br.com.pbd.models.beans.Endereco;
 import br.com.pbd.models.beans.Usuario;
 import br.com.pbd.models.business.ModeloTabela;
@@ -19,8 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 public class CadastrarUsuario extends javax.swing.JFrame {
@@ -28,6 +24,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     
     private int linha;
     private CoreFachada fachada;
+    private int confirmacaoRemocao = 0;
     
     public CadastrarUsuario(CoreFachada fachada) {
         initComponents();
@@ -53,7 +50,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         JTextFieldComplemento = new javax.swing.JTextField();
         jTextFieldBairro = new javax.swing.JTextField();
         jTextFieldCidade = new javax.swing.JTextField();
-        jTextFieldCep = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -63,8 +59,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jTextFieldNaturalidade = new javax.swing.JTextField();
-        jTextFieldDataNascimento = new javax.swing.JTextField();
-        jTextFieldCPF = new javax.swing.JTextField();
         jTextFieldSenha = new javax.swing.JTextField();
         jTextFieldLogin = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -82,6 +76,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jButtonEditar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jFormattedTextFieldDataNascimento = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCEP = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCPF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("System32");
@@ -215,12 +212,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldCep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCepActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Logradouro*");
 
         jLabel4.setText("Número*");
@@ -244,18 +235,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jTextFieldNaturalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNaturalidadeActionPerformed(evt);
-            }
-        });
-
-        jTextFieldDataNascimento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDataNascimentoActionPerformed(evt);
-            }
-        });
-
-        jTextFieldCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCPFActionPerformed(evt);
             }
         });
 
@@ -379,6 +358,24 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jFormattedTextFieldDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jFormattedTextFieldCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -405,8 +402,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                         .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jFormattedTextFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jTextFieldNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -414,7 +411,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jScrollPane1)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
@@ -439,8 +436,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldCep, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jFormattedTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -477,19 +474,19 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                     .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jLabel13)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
@@ -518,8 +515,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                     .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldCep, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldLogradouro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
@@ -603,64 +600,86 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        
-        if(jTextFieldNome.getText() != "" && jTextFieldDataNascimento.getText() != "" && jTextFieldNaturalidade.getText() != "" &&
-                jTextFieldCPF.getText() != "" && jTextFieldLogin.getText() != "" && jTextFieldSenha.getText() != "" &&
-                jTextFieldLogradouro.getText() != "" && jTextFieldNumero.getText() != "" && jTextFieldBairro.getText() != "" &&
-                jTextFieldCidade.getText() != "" && jTextFieldCep.getText() != "" && jTextFieldEstado.getText() != ""){
-            System.out.println("CAMPOS PREENCHIDOS");
-            
+     
+        if (!(jTextFieldNome.getText().equals("") || jFormattedTextFieldDataNascimento.getText().equals("") || jTextFieldNaturalidade.getText().equals("")
+                || jFormattedTextFieldCEP.getText().equals("") || jTextFieldLogin.getText().equals("") || jTextFieldSenha.getText().equals("")
+                || jTextFieldLogradouro.getText().equals("") || jTextFieldNumero.getText().equals("") || jTextFieldBairro.getText().equals("")
+                || jTextFieldCidade.getText().equals("") || jFormattedTextFieldCEP.getText().equals("") || jTextFieldEstado.getText().equals(""))) {
+            List<Usuario> usuarios = fachada.ValidarLogin(jTextFieldLogin.getText(), Criptografar.encriptografar(jTextFieldSenha.getText()));
+            if (!usuarios.isEmpty()) {
+                usuarios.stream().forEach((u) -> {
+                    if (!(u.getLogin().equals(jTextFieldLogin.getText()))) {
+                        Usuario novoUsuario = new Usuario();
+                        novoUsuario.setNome(jTextFieldNome.getText());
+                        novoUsuario.setLogin(jTextFieldLogin.getText());
+                        novoUsuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
+                        novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
+                        novoUsuario.setTipo((String) jComboBoxTipo.getSelectedItem());
+                        novoUsuario.setCpf(jFormattedTextFieldCPF.getText());
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
+                            Date data = formato.parse(jFormattedTextFieldDataNascimento.getText());
+                            novoUsuario.setData_nascimento(data);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        Endereco endereco = new Endereco();
+                        endereco.setLogradouro(jTextFieldLogradouro.getText());
+                        endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
+                        endereco.setBairro(jTextFieldBairro.getText());
+                        endereco.setCidade(jTextFieldCidade.getText());
+                        endereco.setEstado(jTextFieldEstado.getText());
+                        endereco.setCep(jFormattedTextFieldCEP.getText());
+                        endereco.setComplemento(JTextFieldComplemento.getText());
+
+                        fachada.SalvarEndereco(endereco);
+                        novoUsuario.setEndereco(endereco);
+
+                        fachada.SalvarUsuario(novoUsuario);
+                        jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
+                        preencherTabela();
+                        limparCampos();
+                    } else {
+                        jLabelNotificacao.setText("Usuário já existe!");
+                    }
+                });
+            } else {
+                        Usuario novoUsuario = new Usuario();
+                        novoUsuario.setNome(jTextFieldNome.getText());
+                        novoUsuario.setLogin(jTextFieldLogin.getText());
+                        novoUsuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
+                        novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
+                        novoUsuario.setTipo((String) jComboBoxTipo.getSelectedItem());
+                        novoUsuario.setCpf(jFormattedTextFieldCPF.getText());
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
+                            Date data = formato.parse(jFormattedTextFieldDataNascimento.getText());
+                            novoUsuario.setData_nascimento(data);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        Endereco endereco = new Endereco();
+                        endereco.setLogradouro(jTextFieldLogradouro.getText());
+                        endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
+                        endereco.setBairro(jTextFieldBairro.getText());
+                        endereco.setCidade(jTextFieldCidade.getText());
+                        endereco.setEstado(jTextFieldEstado.getText());
+                        endereco.setCep(jFormattedTextFieldCEP.getText());
+                        endereco.setComplemento(JTextFieldComplemento.getText());
+
+                        fachada.SalvarEndereco(endereco);
+                        novoUsuario.setEndereco(endereco);
+
+                        fachada.SalvarUsuario(novoUsuario);
+                        jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
+                        preencherTabela();
+                        limparCampos();
+            }
+        } else {
+            jLabelNotificacao.setText("Preencha todos os campos *.");
         }
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        Usuario novoUsuario = new Usuario();
-//        novoUsuario.setNome(jTextFieldNome.getText());
-//        novoUsuario.setLogin(jTextFieldLogin.getText());
-//        novoUsuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
-//        novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
-//        novoUsuario.setTipo((String)jComboBoxTipo.getSelectedItem());
-//        novoUsuario.setCpf(jTextFieldCPF.getText());
-//        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-//        try {
-//            Date data = formato.parse(jTextFieldDataNascimento.getText());
-//            novoUsuario.setData_nascimento(data);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        Endereco endereco = new Endereco();
-//        endereco.setLogradouro(jTextFieldLogradouro.getText());
-//        endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
-//        endereco.setBairro(jTextFieldBairro.getText());
-//        endereco.setCidade(jTextFieldCidade.getText());
-//        endereco.setEstado(jTextFieldEstado.getText());
-//        endereco.setCep(jTextFieldCPF.getText());
-//        endereco.setComplemento(JTextFieldComplemento.getText());
-//        
-//        fachada.SalvarEndereco(endereco);
-//        novoUsuario.setEndereco(endereco);
-//        
-//        fachada.SalvarUsuario(novoUsuario);
-//        jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
-//        
-//        preencherTabela();
-        
-        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jTextFieldNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNumeroActionPerformed
@@ -687,10 +706,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCidadeActionPerformed
 
-    private void jTextFieldCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCepActionPerformed
-
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
@@ -698,14 +713,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private void jTextFieldNaturalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNaturalidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNaturalidadeActionPerformed
-
-    private void jTextFieldDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDataNascimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDataNascimentoActionPerformed
-
-    private void jTextFieldCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCPFActionPerformed
 
     private void jTextFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSenhaActionPerformed
         // TODO add your handling code here:
@@ -775,7 +782,27 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExcluirMouseExited
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
+        confirmacaoRemocao +=1;
+        if(linha != 0){
+            System.out.println(confirmacaoRemocao);
+            jLabelNotificacao.setText("Deseja excluir " + JTableFiliais.getValueAt(linha, 2) + "?");
+            if(confirmacaoRemocao == 2){
+                try {
+                    fachada.RemoverUsuario((Integer) JTableFiliais.getValueAt(linha, 0));
+                    jLabelNotificacao.setText("Usuario removido com sucesso!");
+                    confirmacaoRemocao = 0;
+                    linha = 0;
+                    preencherTabela();
+                } catch (NonexistentEntityException ex) {
+                    jLabelNotificacao.setText("Erro ao remover usuário!");
+                    confirmacaoRemocao = 0;
+                }
+            }
+        }else{
+            jLabelNotificacao.setText("Selecione um Usuario na tabela!");
+            confirmacaoRemocao = 0;
+        }
+            
     }//GEN-LAST:event_jButtonExcluirActionPerformed
     
 
@@ -860,6 +887,22 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         JTableFiliais.setAutoResizeMode(JTableFiliais.AUTO_RESIZE_OFF);
         JTableFiliais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
+        
+    public void limparCampos(){
+        jTextFieldNome.setText("");
+        jFormattedTextFieldDataNascimento.setText("");
+        jTextFieldNaturalidade.setText("");
+        jFormattedTextFieldCEP.setText("");
+        jTextFieldLogin.setText("");
+        jTextFieldSenha.setText("");
+        jTextFieldLogradouro.setText("");
+        jTextFieldNumero.setText("");
+        jTextFieldBairro.setText("");
+        jTextFieldCidade.setText("");
+        jFormattedTextFieldCPF.setText("");
+        jTextFieldEstado.setText("");
+        JTextFieldComplemento.setText("");
+    }
     
     public void camposLiberados(){
 //        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
@@ -881,6 +924,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox jComboBoxTipo;
     private javax.swing.JComboBox jComboBoxTipoPesquisa;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCEP;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCPF;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataNascimento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -903,10 +949,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldBairro;
-    private javax.swing.JTextField jTextFieldCPF;
-    private javax.swing.JTextField jTextFieldCep;
     private javax.swing.JTextField jTextFieldCidade;
-    private javax.swing.JTextField jTextFieldDataNascimento;
     private javax.swing.JTextField jTextFieldEstado;
     private javax.swing.JTextField jTextFieldLogin;
     private javax.swing.JTextField jTextFieldLogradouro;

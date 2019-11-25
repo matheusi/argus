@@ -1,10 +1,13 @@
 package br.com.pbd.models.dao;
 
+import br.com.pbd.models.beans.Endereco;
 import br.com.pbd.models.beans.Usuario;
+import br.com.pbd.models.dao.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
@@ -74,6 +77,33 @@ public class UsuarioDAO implements IcoreUsuarioDAO, Serializable {
           em.close();
       }
         return usuarios;
+    }
+
+    @Override
+    public void Remover(Integer id) throws NonexistentEntityException{
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Usuario usuario;
+            try {
+                usuario = em.getReference(Usuario.class, id);
+                usuario.getId();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
+            }
+            Endereco endereco = usuario.getEndereco();
+            if (endereco != null) {
+                endereco.setPessoa(null);
+                endereco = em.merge(endereco);
+            }
+            em.remove(usuario);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
     
 }

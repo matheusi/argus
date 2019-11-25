@@ -13,6 +13,7 @@ public interface IcoreFachada {
     public void SalvarUsuario(Usuario usuario);
     public List<Usuario> getTodosUsuarios();
     public List<Usuario> getUsuarioPorNome(String nome);
+    public void RemoverUsuario(Integer id) throws NonexistentEntityException;
     
     //ENDERECO
      public void SalvarEndereco(Endereco endereco);

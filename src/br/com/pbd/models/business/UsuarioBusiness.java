@@ -29,4 +29,9 @@ public class UsuarioBusiness implements IcoreUsuarioBusiness{
     public List<Usuario> getUsuarioPorNome(String nome){
         return usuarioDao.getUsuarioPorNome(nome);
     }
+
+    @Override
+    public void Remover(Integer id) throws NonexistentEntityException {
+        usuarioDao.Remover(id);
+    }
 }

@@ -48,4 +48,9 @@ public class CoreFachada implements IcoreFachada{
     public List<Usuario> getUsuarioPorNome(String nome){
         return usuarioBusiness.getUsuarioPorNome(nome);
     }
+
+    @Override
+    public void RemoverUsuario(Integer id) throws NonexistentEntityException {
+        usuarioBusiness.Remover(id);
+    }
 }

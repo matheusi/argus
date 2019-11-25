@@ -8,4 +8,6 @@ public interface IcoreUsuarioBusiness {
     public void Salvar(Usuario usuario);
     public List<Usuario> getTodosUsuarios();
     public List<Usuario> getUsuarioPorNome(String nome) ;
+
+    public void Remover(Integer id) throws NonexistentEntityException;
 }

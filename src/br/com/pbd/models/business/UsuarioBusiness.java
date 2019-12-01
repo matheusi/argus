@@ -34,4 +34,14 @@ public class UsuarioBusiness implements IcoreUsuarioBusiness{
     public void Remover(Integer id) throws NonexistentEntityException {
         usuarioDao.Remover(id);
     }
+
+    @Override
+    public void Editar(Usuario usuario) throws NonexistentEntityException, Exception {
+        usuarioDao.Editar(usuario);
+    }
+
+    @Override
+    public Usuario getUsuarioPorId(Integer id) {
+        return usuarioDao.getUsuarioPorId(id);
+    }
 }

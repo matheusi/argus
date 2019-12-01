@@ -25,6 +25,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private int linha;
     private CoreFachada fachada;
     private int confirmacaoRemocao = 0;
+    private int confirmacaoEdicao = 0;
     
     public CadastrarUsuario(CoreFachada fachada) {
         initComponents();
@@ -768,7 +769,80 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditarMouseExited
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+        confirmacaoEdicao += 1;
+        if (linha != 0) {
+            Usuario usuario = fachada.getUsuarioPorId((Integer) JTableFiliais.getValueAt(linha, 0));
+            if (confirmacaoEdicao == 1) {
+                jLabelNotificacao.setText("Deseja editar " + JTableFiliais.getValueAt(linha, 2) + "?");
+                jTextFieldNome.setText(usuario.getNome());
+                SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
+                String result = out.format(usuario.getData_nascimento());
+                jFormattedTextFieldDataNascimento.setText(result);
+                jTextFieldNaturalidade.setText(usuario.getNaturalidade());
+                jFormattedTextFieldCEP.setText(usuario.getEndereco().getCep());
+                jTextFieldLogin.setText(usuario.getLogin());
+                jTextFieldLogin.setEnabled(false);
+                jTextFieldSenha.setText(Criptografar.encriptografar(usuario.getSenha()));
+                jTextFieldLogradouro.setText(usuario.getEndereco().getLogradouro());
+                jTextFieldNumero.setText(Integer.toString(usuario.getEndereco().getNumero()));
+                jTextFieldBairro.setText(usuario.getEndereco().getBairro());
+                jTextFieldCidade.setText(usuario.getEndereco().getCidade());
+                jFormattedTextFieldCPF.setText(usuario.getCpf());
+                jTextFieldEstado.setText(usuario.getEndereco().getEstado());
+                JTextFieldComplemento.setText(usuario.getEndereco().getComplemento());
+            }
+            if (confirmacaoEdicao == 2) {
+                if (!(jTextFieldNome.getText().equals("") || jFormattedTextFieldDataNascimento.getText().equals("") || jTextFieldNaturalidade.getText().equals("")
+                        || jFormattedTextFieldCEP.getText().equals("") || jTextFieldLogin.getText().equals("") || jTextFieldSenha.getText().equals("")
+                        || jTextFieldLogradouro.getText().equals("") || jTextFieldNumero.getText().equals("") || jTextFieldBairro.getText().equals("")
+                        || jTextFieldCidade.getText().equals("") || jFormattedTextFieldCEP.getText().equals("") || jTextFieldEstado.getText().equals(""))) {
+
+                    usuario.setNome(jTextFieldNome.getText());
+                    usuario.setLogin(jTextFieldLogin.getText());
+                    usuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
+                    usuario.setNaturalidade(jTextFieldNaturalidade.getText());
+                    usuario.setTipo((String) jComboBoxTipo.getSelectedItem());
+                    usuario.setCpf(jFormattedTextFieldCPF.getText());
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    try {
+                        Date data = formato.parse(jFormattedTextFieldDataNascimento.getText());
+                        usuario.setData_nascimento(data);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Endereco endereco = new Endereco();
+                    endereco = usuario.getEndereco();
+                    endereco.setLogradouro(jTextFieldLogradouro.getText());
+                    endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
+                    endereco.setBairro(jTextFieldBairro.getText());
+                    endereco.setCidade(jTextFieldCidade.getText());
+                    endereco.setEstado(jTextFieldEstado.getText());
+                    endereco.setCep(jFormattedTextFieldCEP.getText());
+                    endereco.setComplemento(JTextFieldComplemento.getText());
+                    usuario.setEndereco(endereco);
+
+                    try {
+                        fachada.EditarEndereco(endereco);
+                        fachada.EditarUsuario(usuario);
+                        jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
+                        confirmacaoEdicao = 0;
+                        linha = 0;
+                        preencherTabela();
+                        limparCampos();
+                        jTextFieldLogin.setEnabled(true);
+                    } catch (Exception ex) {
+                        jLabelNotificacao.setText("Erro ao modificar usuario");
+                        confirmacaoEdicao = 0;
+                    }
+                } else {
+                    jLabelNotificacao.setText("Preencha todos os campos *.");
+                    confirmacaoEdicao = 0;
+                }
+            }
+        } else {
+            jLabelNotificacao.setText("Selecione um Usuario na tabela!");
+            confirmacaoEdicao = 0;
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonExcluirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExcluirMouseEntered
@@ -784,7 +858,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         confirmacaoRemocao +=1;
         if(linha != 0){
-            System.out.println(confirmacaoRemocao);
             jLabelNotificacao.setText("Deseja excluir " + JTableFiliais.getValueAt(linha, 2) + "?");
             if(confirmacaoRemocao == 2){
                 try {

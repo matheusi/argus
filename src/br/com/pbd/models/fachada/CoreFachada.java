@@ -53,4 +53,19 @@ public class CoreFachada implements IcoreFachada{
     public void RemoverUsuario(Integer id) throws NonexistentEntityException {
         usuarioBusiness.Remover(id);
     }
+
+    @Override
+    public void EditarUsuario(Usuario usuario) throws NonexistentEntityException, Exception {
+        usuarioBusiness.Editar(usuario);
+    }
+
+    @Override
+    public Usuario getUsuarioPorId(Integer id) {
+        return usuarioBusiness.getUsuarioPorId(id);
+    }
+
+    @Override
+    public void EditarEndereco(Endereco endereco) throws NonexistentEntityException, Exception {
+        enderecoBusiness.Editar(endereco);
+    }
 }

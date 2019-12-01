@@ -26,12 +26,12 @@ public class UsuarioDAO implements IcoreUsuarioDAO, Serializable {
     }
 
     @Override
-    public void Salvar(Usuario funcionario) {
+    public void Salvar(Usuario usuario) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(funcionario);
+            em.persist(usuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -60,7 +60,16 @@ public class UsuarioDAO implements IcoreUsuarioDAO, Serializable {
             em.close();
         }
     }
-
+    
+    public Usuario findUsuario(Integer id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Usuario.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
     @Override
     public List<Usuario> getUsuarioPorNome(String nome) {
         EntityManager em = getEntityManager();
@@ -103,6 +112,42 @@ public class UsuarioDAO implements IcoreUsuarioDAO, Serializable {
             if (em != null) {
                 em.close();
             }
+        }
+    }
+
+    @Override
+    public void Editar(Usuario usuario) throws NonexistentEntityException, Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            usuario = em.merge(usuario);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = usuario.getId();
+                if (findUsuario(id) == null) {
+                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Override
+    public Usuario getUsuarioPorId(Integer id) {
+        EntityManager em = getEntityManager();
+        try {
+            Usuario usuario = em.find(Usuario.class, id);
+            usuario.getEndereco();
+            return usuario;
+        } finally {
+            em.close();
         }
     }
     

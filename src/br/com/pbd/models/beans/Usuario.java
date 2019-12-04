@@ -52,11 +52,15 @@ public class Usuario implements Serializable {
     @ManyToOne(optional = true)
     @JoinColumn(referencedColumnName = "id")
     private Endereco endereco;
+    
+    @ManyToOne(optional = true)
+    @JoinColumn(referencedColumnName = "id")
+    private AtendimentoPedagogico atendimentoPedagogico;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nome, Date data_nascimento, String naturalidade, String cpf, String login, String senha, String tipo, Endereco endereco) {
+    public Usuario(Integer id, String nome, Date data_nascimento, String naturalidade, String cpf, String login, String senha, String tipo, Endereco endereco, AtendimentoPedagogico atendimentoPedagogico) {
         this.id = id;
         this.nome = nome;
         this.data_nascimento = data_nascimento;
@@ -66,6 +70,7 @@ public class Usuario implements Serializable {
         this.senha = senha;
         this.tipo = tipo;
         this.endereco = endereco;
+        this.atendimentoPedagogico = atendimentoPedagogico;
     }
 
     
@@ -142,6 +147,16 @@ public class Usuario implements Serializable {
         this.endereco = endereco;
     }
 
+    public AtendimentoPedagogico getAtendimentoPedagogico() {
+        return atendimentoPedagogico;
+    }
+
+    public void setAtendimentoPedagogico(AtendimentoPedagogico atendimentoPedagogico) {
+        this.atendimentoPedagogico = atendimentoPedagogico;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -154,6 +169,7 @@ public class Usuario implements Serializable {
         hash = 47 * hash + Objects.hashCode(this.senha);
         hash = 47 * hash + Objects.hashCode(this.tipo);
         hash = 47 * hash + Objects.hashCode(this.endereco);
+        hash = 47 * hash + Objects.hashCode(this.atendimentoPedagogico);
         return hash;
     }
 
@@ -193,14 +209,15 @@ public class Usuario implements Serializable {
         if (!Objects.equals(this.endereco, other.endereco)) {
             return false;
         }
+        if (!Objects.equals(this.atendimentoPedagogico, other.atendimentoPedagogico)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nome=" + nome + ", data_nascimento=" + data_nascimento + ", naturalidade=" + naturalidade + ", cpf=" + cpf + ", login=" + login + ", senha=" + senha + ", tipo=" + tipo + ", endereco=" + endereco + '}';
+        return "Usuario{" + "id=" + id + ", nome=" + nome + ", data_nascimento=" + data_nascimento + ", naturalidade=" + naturalidade + ", cpf=" + cpf + ", login=" + login + ", senha=" + senha + ", tipo=" + tipo + ", endereco=" + endereco + ", atendimentoPedagogico=" + atendimentoPedagogico + '}';
     }
 
-    
-    
 }

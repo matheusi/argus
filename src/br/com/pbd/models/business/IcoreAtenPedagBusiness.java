@@ -4,7 +4,7 @@ import br.com.pbd.models.beans.AtendimentoPedagogico;
 import br.com.pbd.models.dao.exceptions.NonexistentEntityException;
 import java.util.List;
 
-public interface IcoreAtenPedag {
+public interface IcoreAtenPedagBusiness {
     
     public void Salvar(AtendimentoPedagogico atendimentoPedagogico);
     public List<AtendimentoPedagogico> getTodosAtendPedag();

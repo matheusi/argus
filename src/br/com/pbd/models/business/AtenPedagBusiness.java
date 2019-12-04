@@ -8,7 +8,7 @@ import br.com.pbd.util.Conexao;
 import java.util.List;
 
 
-public class AtenPedagBusiness implements IcoreAtenPedag{
+public class AtenPedagBusiness implements IcoreAtenPedagBusiness{
     
     IcoreAtenPedagDAO atendPedagDAO;
 
@@ -28,22 +28,22 @@ public class AtenPedagBusiness implements IcoreAtenPedag{
 
     @Override
     public List<AtendimentoPedagogico> getAtendPedagPorNome(String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return atendPedagDAO.getAtendPedagPorNome(nome);
     }
 
     @Override
     public AtendimentoPedagogico getAtendPedagPorId(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return atendPedagDAO.getAtendPedagPorId(id);
     }
 
     @Override
     public void Remover(Integer id) throws NonexistentEntityException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        atendPedagDAO.Remover(id);
     }
 
     @Override
     public void Editar(AtendimentoPedagogico atendimentoPedagogico) throws NonexistentEntityException, Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        atendPedagDAO.Editar(atendimentoPedagogico);
     }
     
 }

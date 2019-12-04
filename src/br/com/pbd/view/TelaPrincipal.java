@@ -22,6 +22,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButtonUsuários = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
+        jButtonUsuários1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("System32");
@@ -111,13 +112,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButtonUsuários1.setBackground(new java.awt.Color(58, 65, 84));
+        jButtonUsuários1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonUsuários1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonUsuários1.setText("Atendimento Pedagogico");
+        jButtonUsuários1.setBorderPainted(false);
+        jButtonUsuários1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonUsuários1.setFocusPainted(false);
+        jButtonUsuários1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButtonUsuários1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButtonUsuários1MouseExited(evt);
+            }
+        });
+        jButtonUsuários1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUsuários1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonUsuários, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonUsuários, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonUsuários1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -129,7 +153,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonUsuários, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(591, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonUsuários1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(539, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,10 +223,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonUsuáriosActionPerformed
 
+    private void jButtonUsuários1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsuários1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonUsuários1MouseEntered
+
+    private void jButtonUsuários1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsuários1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonUsuários1MouseExited
+
+    private void jButtonUsuários1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsuários1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonUsuários1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonUsuários;
+    private javax.swing.JButton jButtonUsuários1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

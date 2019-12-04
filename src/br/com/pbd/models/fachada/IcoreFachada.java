@@ -1,5 +1,6 @@
 package br.com.pbd.models.fachada;
 
+import br.com.pbd.models.beans.AtendimentoPedagogico;
 import br.com.pbd.models.beans.Endereco;
 import br.com.pbd.models.beans.Usuario;
 import br.com.pbd.models.dao.exceptions.NonexistentEntityException;
@@ -20,4 +21,12 @@ public interface IcoreFachada {
     //ENDERECO
      public void SalvarEndereco(Endereco endereco);
      public void EditarEndereco(Endereco endereco) throws NonexistentEntityException, Exception;
+     
+     //ATENDIMENTO PEDAGOGICO
+    public void Salvar(AtendimentoPedagogico atendimentoPedagogico);
+    public List<AtendimentoPedagogico> getTodosAtendPedag();
+    public List<AtendimentoPedagogico> getAtendPedagPorNome(String nome) ;
+    public AtendimentoPedagogico getAtendPedagPorId(Integer id);
+    public void Remover(Integer id) throws NonexistentEntityException;
+    public void Editar(AtendimentoPedagogico atendimentoPedagogico) throws  NonexistentEntityException,Exception;
 }

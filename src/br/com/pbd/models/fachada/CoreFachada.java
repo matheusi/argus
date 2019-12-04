@@ -1,8 +1,11 @@
 package br.com.pbd.models.fachada;
 
+import br.com.pbd.models.beans.AtendimentoPedagogico;
 import br.com.pbd.models.beans.Endereco;
 import br.com.pbd.models.beans.Usuario;
+import br.com.pbd.models.business.AtenPedagBusiness;
 import br.com.pbd.models.business.EnderecoBusiness;
+import br.com.pbd.models.business.IcoreAtenPedagBusiness;
 import br.com.pbd.models.business.IcoreEnderecoBusiness;
 import br.com.pbd.models.business.IcoreUsuarioBusiness;
 import br.com.pbd.models.business.IcoreValidacaoBusiness;
@@ -16,11 +19,13 @@ public class CoreFachada implements IcoreFachada{
     IcoreValidacaoBusiness validacaoBusiness;
     IcoreUsuarioBusiness usuarioBusiness;
     IcoreEnderecoBusiness enderecoBusiness;
+    IcoreAtenPedagBusiness atendPedagBusiness;
     
     public CoreFachada() {
         this.validacaoBusiness = new ValidacaoBusiness();
         this.usuarioBusiness = new UsuarioBusiness();
         this.enderecoBusiness = new EnderecoBusiness();
+        this.atendPedagBusiness = new AtenPedagBusiness();
     }
 
     @Override
@@ -67,5 +72,35 @@ public class CoreFachada implements IcoreFachada{
     @Override
     public void EditarEndereco(Endereco endereco) throws NonexistentEntityException, Exception {
         enderecoBusiness.Editar(endereco);
+    }
+
+    @Override
+    public void Salvar(AtendimentoPedagogico atendimentoPedagogico) {
+        atendPedagBusiness.Salvar(atendimentoPedagogico);
+    }
+
+    @Override
+    public List<AtendimentoPedagogico> getTodosAtendPedag() {
+        return atendPedagBusiness.getTodosAtendPedag();
+    }
+
+    @Override
+    public List<AtendimentoPedagogico> getAtendPedagPorNome(String nome) {
+        return atendPedagBusiness.getAtendPedagPorNome(nome);
+    }
+
+    @Override
+    public AtendimentoPedagogico getAtendPedagPorId(Integer id) {
+        return atendPedagBusiness.getAtendPedagPorId(id);
+    }
+
+    @Override
+    public void Remover(Integer id) throws NonexistentEntityException {
+        atendPedagBusiness.getAtendPedagPorId(id);
+    }
+
+    @Override
+    public void Editar(AtendimentoPedagogico atendimentoPedagogico) throws NonexistentEntityException, Exception {
+        atendPedagBusiness.Editar(atendimentoPedagogico);
     }
 }

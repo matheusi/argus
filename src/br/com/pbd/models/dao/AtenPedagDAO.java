@@ -91,7 +91,7 @@ public class AtenPedagDAO implements IcoreAtenPedagDAO, Serializable {
         EntityManager em = getEntityManager();
         try {
             AtendimentoPedagogico atendPedag = em.find(AtendimentoPedagogico.class, id);
-            atendPedag.getPessoa();
+            atendPedag.getPessoas();
             return atendPedag;
         } finally {
             em.close();

@@ -103,4 +103,9 @@ public class CoreFachada implements IcoreFachada{
     public void Editar(AtendimentoPedagogico atendimentoPedagogico) throws NonexistentEntityException, Exception {
         atendPedagBusiness.Editar(atendimentoPedagogico);
     }
+
+    @Override
+    public List<Usuario> getTodosAlunos() {
+        return usuarioBusiness.getTodosAlunos();
+    }
 }

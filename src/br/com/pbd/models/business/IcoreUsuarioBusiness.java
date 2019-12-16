@@ -7,6 +7,7 @@ import java.util.List;
 public interface IcoreUsuarioBusiness {
     public void Salvar(Usuario usuario);
     public List<Usuario> getTodosUsuarios();
+    public List<Usuario> getTodosAlunos();
     public List<Usuario> getUsuarioPorNome(String nome) ;
     public Usuario getUsuarioPorId(Integer id);
 

@@ -26,12 +26,15 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private CoreFachada fachada;
     private int confirmacaoRemocao = 0;
     private int confirmacaoEdicao = 0;
+    private Usuario usuarioCorrente;
     
-    public CadastrarUsuario(CoreFachada fachada) {
+    public CadastrarUsuario(CoreFachada fachada, Usuario usuarioCorrente) {
         initComponents();
         this.fachada = fachada;
         preencherTabela();
-        camposLiberados();
+        this.usuarioCorrente = usuarioCorrente;
+        jTextFieldLogin.setEnabled(false);
+        jTextFieldSenha.setEnabled(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -80,6 +83,10 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jFormattedTextFieldDataNascimento = new javax.swing.JFormattedTextField();
         jFormattedTextFieldCEP = new javax.swing.JFormattedTextField();
         jFormattedTextFieldCPF = new javax.swing.JFormattedTextField();
+        jTextFieldNomePai = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jTextFieldNomeMae = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("System32");
@@ -129,7 +136,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(91, 95, 99));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Cadastro de Usuários");
+        jLabel2.setText("Cadastro de Pessoas");
 
         jButtonSalvar.setBackground(new java.awt.Color(58, 65, 84));
         jButtonSalvar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -261,10 +268,16 @@ public class CadastrarUsuario extends javax.swing.JFrame {
 
         jLabel14.setText("Naturalidade*");
 
-        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Secretário", "Diretor", "Pedagogo" }));
+        jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aluno", "Administrador", "Secretário", "Diretor", "Pedagogo" }));
         jComboBoxTipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBoxTipoMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBoxTipoMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jComboBoxTipoMouseReleased(evt);
             }
         });
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +286,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setText("CPF*");
+        jLabel15.setText("CPF do Responsável Financeiro");
 
         jScrollPane1.setBackground(new java.awt.Color(194, 215, 230));
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -377,6 +390,22 @@ public class CadastrarUsuario extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jTextFieldNomePai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomePaiActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Nome do Pai");
+
+        jTextFieldNomeMae.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNomeMaeActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("Nome da Mãe");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -394,8 +423,16 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldNomePai, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldNomeMae, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,9 +447,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                                         .addComponent(jTextFieldNaturalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jFormattedTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jFormattedTextFieldCPF)
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jScrollPane1)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
@@ -490,11 +527,15 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNomePai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNomeMae, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -560,7 +601,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        TelaPrincipal telaPrincipal = new TelaPrincipal(fachada);
+        TelaPrincipal telaPrincipal = new TelaPrincipal(fachada, usuarioCorrente);
         telaPrincipal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
@@ -601,7 +642,49 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-     
+     if(jComboBoxTipo.getSelectedItem().equals("Aluno")){
+        if (!(jTextFieldNome.getText().equals("") || jFormattedTextFieldDataNascimento.getText().equals("") || jTextFieldNaturalidade.getText().equals("")
+                || jFormattedTextFieldCEP.getText().equals("") || jTextFieldLogradouro.getText().equals("") || jTextFieldNumero.getText().equals("")
+                || jTextFieldBairro.getText().equals("") || jTextFieldCidade.getText().equals("") || jFormattedTextFieldCEP.getText().equals("")
+                || jTextFieldEstado.getText().equals(""))) {
+
+    
+                        Usuario novoUsuario = new Usuario();
+                        novoUsuario.setNome(jTextFieldNome.getText());
+                        novoUsuario.setNomePai(jTextFieldNomePai.getText());
+                        novoUsuario.setNomeMae(jTextFieldNomeMae.getText());
+                        novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
+                        novoUsuario.setTipo((String) jComboBoxTipo.getSelectedItem());
+                        novoUsuario.setCpf(jFormattedTextFieldCPF.getText());
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
+                            Date data = formato.parse(jFormattedTextFieldDataNascimento.getText());
+                            novoUsuario.setData_nascimento(data);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        Endereco endereco = new Endereco();
+                        endereco.setLogradouro(jTextFieldLogradouro.getText());
+                        endereco.setNumero(Integer.parseInt(jTextFieldNumero.getText()));
+                        endereco.setBairro(jTextFieldBairro.getText());
+                        endereco.setCidade(jTextFieldCidade.getText());
+                        endereco.setEstado(jTextFieldEstado.getText());
+                        endereco.setCep(jFormattedTextFieldCEP.getText());
+                        endereco.setComplemento(JTextFieldComplemento.getText());
+
+                        fachada.SalvarEndereco(endereco);
+                        novoUsuario.setEndereco(endereco);
+
+                        fachada.SalvarUsuario(novoUsuario);
+                        jLabelNotificacao.setText("Usuário Salvo com Sucesso!");
+                        preencherTabela();
+                        limparCampos();
+            
+        } else {
+            jLabelNotificacao.setText("Preencha todos os campos *.");
+        }
+     }else{
         if (!(jTextFieldNome.getText().equals("") || jFormattedTextFieldDataNascimento.getText().equals("") || jTextFieldNaturalidade.getText().equals("")
                 || jFormattedTextFieldCEP.getText().equals("") || jTextFieldLogin.getText().equals("") || jTextFieldSenha.getText().equals("")
                 || jTextFieldLogradouro.getText().equals("") || jTextFieldNumero.getText().equals("") || jTextFieldBairro.getText().equals("")
@@ -612,6 +695,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
                     if (!(u.getLogin().equals(jTextFieldLogin.getText()))) {
                         Usuario novoUsuario = new Usuario();
                         novoUsuario.setNome(jTextFieldNome.getText());
+//                        novoUsuario.setNomePai(jTextFieldNomePai.getText());
+//                        novoUsuario.setNomeMae(jTextFieldNomeMae.getText());
                         novoUsuario.setLogin(jTextFieldLogin.getText());
                         novoUsuario.setSenha(Criptografar.encriptografar(jTextFieldSenha.getText()));
                         novoUsuario.setNaturalidade(jTextFieldNaturalidade.getText());
@@ -681,6 +766,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         } else {
             jLabelNotificacao.setText("Preencha todos os campos *.");
         }
+     }
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jTextFieldNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNumeroActionPerformed
@@ -741,7 +828,9 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void jComboBoxTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoMouseClicked
-        camposLiberados();
+
+                
+                
     }//GEN-LAST:event_jComboBoxTipoMouseClicked
 
     private void jComboBoxTipoPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoPesquisaMouseClicked
@@ -877,6 +966,27 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         }
             
     }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    private void jTextFieldNomePaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomePaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomePaiActionPerformed
+
+    private void jTextFieldNomeMaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeMaeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeMaeActionPerformed
+
+    private void jComboBoxTipoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoMouseReleased
+
+    }//GEN-LAST:event_jComboBoxTipoMouseReleased
+
+    private void jComboBoxTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoMousePressed
+        if(usuarioCorrente.getTipo().equals("Administrador")){
+            camposLiberados();
+        }else{
+            jLabelNotificacao.setText("Você não pode cadastrar outro tipo!");
+            jComboBoxTipo.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_jComboBoxTipoMousePressed
     
 
     public void loginInvalido(){
@@ -975,17 +1085,23 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         jFormattedTextFieldCPF.setText("");
         jTextFieldEstado.setText("");
         JTextFieldComplemento.setText("");
+        jTextFieldNomePai.setText("");
+        jTextFieldNomeMae.setText("");
     }
     
     public void camposLiberados(){
-//        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
-//            jTextFieldLogin.setEnabled(false);
-//            jTextFieldSenha.setEnabled(false);
-//        }
-//        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
-//            jTextFieldLogin.setEnabled(false);
-//            jTextFieldSenha.setEnabled(false);
-//        }
+        if(jComboBoxTipo.getSelectedItem().equals("ALUNO")){
+            jTextFieldNomeMae.setEnabled(true);
+            jTextFieldNomePai.setEnabled(true);
+            jTextFieldLogin.setEnabled(false);
+            jTextFieldSenha.setEnabled(false);
+        }else{
+            jTextFieldNomePai.setEnabled(false);
+            jTextFieldNomeMae.setEnabled(false);
+            jTextFieldLogin.setEnabled(true);
+            jTextFieldSenha.setEnabled(true);
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1009,6 +1125,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1028,6 +1146,8 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldLogradouro;
     private javax.swing.JTextField jTextFieldNaturalidade;
     private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldNomeMae;
+    private javax.swing.JTextField jTextFieldNomePai;
     private javax.swing.JTextField jTextFieldNumero;
     private javax.swing.JTextField jTextFieldPesquisa;
     private javax.swing.JTextField jTextFieldSenha;

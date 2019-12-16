@@ -19,34 +19,36 @@ public class App {
         TelaLogin telaLogin = new TelaLogin(fachada);
         telaLogin.setVisible(true);
         
-        Usuario admin = new Usuario();
-        admin.setNome("Matheus");
-        admin.setLogin("admin");
-        admin.setSenha("admin");
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-        try {
-            Date data = formato.parse("27/09/1995");
-            admin.setData_nascimento(data);
-        } catch (ParseException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        admin.setNaturalidade("Brasileiro");
-        admin.setSenha(Criptografar.encriptografar("admin"));
-        admin.setTipo("Administrador");
-        admin.setCpf("10884550427");
-        
-        Endereco endereco = new Endereco();
-        endereco.setLogradouro("Rua Presidente Kennedy");
-        endereco.setNumero(38);
-        endereco.setBairro("Centro");
-        endereco.setCidade("Carnaíba");
-        endereco.setEstado("Pernambuco");
-        endereco.setCep("56820000");
-        endereco.setComplemento("Casa");
+        if (fachada.getTodosUsuarios().isEmpty()) {
+            Usuario admin = new Usuario();
+            admin.setNome("Matheus Pereira de Brito");
+            admin.setLogin("admin");
+            admin.setSenha("admin");
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                Date data = formato.parse("27/09/1995");
+                admin.setData_nascimento(data);
+            } catch (ParseException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            admin.setNaturalidade("Brasileiro");
+            admin.setSenha(Criptografar.encriptografar("admin"));
+            admin.setTipo("Administrador");
+            admin.setCpf("10884550427");
 
-        admin.setEndereco(endereco);
-        
-        fachada.SalvarEndereco(endereco);
-        fachada.SalvarUsuario(admin);
+            Endereco endereco = new Endereco();
+            endereco.setLogradouro("Rua Presidente Kennedy");
+            endereco.setNumero(38);
+            endereco.setBairro("Centro");
+            endereco.setCidade("Carnaíba");
+            endereco.setEstado("Pernambuco");
+            endereco.setCep("56820000");
+            endereco.setComplemento("Casa");
+
+            admin.setEndereco(endereco);
+
+            fachada.SalvarEndereco(endereco);
+            fachada.SalvarUsuario(admin);
+        }
     }
 }

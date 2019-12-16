@@ -11,6 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -37,10 +41,13 @@ public class AtendimentoPedagogico implements Serializable{
     @Column(length = 255, nullable = false)
     private String status;
     
-    @OneToMany(mappedBy = "atendimentoPedagogico")
-    private List<Usuario> pessoa = new LinkedList<Usuario>();
+    @ManyToMany
+    @JoinTable(name = "atend_pedag_usua", joinColumns = @JoinColumn(name = "id_atend"), inverseJoinColumns = @JoinColumn(name = "id_usua"))
+    private List<Usuario> pessoas = new LinkedList<Usuario>();
+    
 
     public AtendimentoPedagogico() {
+        
     }
 
     public AtendimentoPedagogico(Integer id, String descricao, Date data, String status) {
@@ -82,22 +89,22 @@ public class AtendimentoPedagogico implements Serializable{
         this.status = status;
     }
 
-    public List<Usuario> getPessoa() {
-        return pessoa;
+    public List<Usuario> getPessoas() {
+        return pessoas;
     }
 
-    public void setPessoa(List<Usuario> pessoa) {
-        this.pessoa = pessoa;
+    public void setPessoas(List<Usuario> pessoas) {
+        this.pessoas = pessoas;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.descricao);
-        hash = 89 * hash + Objects.hashCode(this.data);
-        hash = 89 * hash + Objects.hashCode(this.status);
-        hash = 89 * hash + Objects.hashCode(this.pessoa);
+        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 71 * hash + Objects.hashCode(this.descricao);
+        hash = 71 * hash + Objects.hashCode(this.data);
+        hash = 71 * hash + Objects.hashCode(this.status);
+        hash = 71 * hash + Objects.hashCode(this.pessoas);
         return hash;
     }
 
@@ -122,7 +129,7 @@ public class AtendimentoPedagogico implements Serializable{
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
-        if (!Objects.equals(this.pessoa, other.pessoa)) {
+        if (!Objects.equals(this.pessoas, other.pessoas)) {
             return false;
         }
         return true;
@@ -130,9 +137,9 @@ public class AtendimentoPedagogico implements Serializable{
 
     @Override
     public String toString() {
-        return "AtendimentoPedagogico{" + "id=" + id + ", descricao=" + descricao + ", data=" + data + ", status=" + status + ", pessoa=" + pessoa + '}';
+        return "AtendimentoPedagogico{" + "id=" + id + ", descricao=" + descricao + ", data=" + data + ", status=" + status + ", pessoas=" + pessoas + '}';
     }
+
     
-    
-    
+
 }

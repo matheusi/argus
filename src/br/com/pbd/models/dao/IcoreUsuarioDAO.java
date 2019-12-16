@@ -13,6 +13,8 @@ public interface IcoreUsuarioDAO {
     public List<Usuario> getUsuarioPorNome(String nome);
     
     public Usuario getUsuarioPorId(Integer id);
+    
+    public List<Usuario> getTodosAlunos();
 
     public void Remover(Integer id) throws NonexistentEntityException;
     

@@ -44,4 +44,9 @@ public class UsuarioBusiness implements IcoreUsuarioBusiness{
     public Usuario getUsuarioPorId(Integer id) {
         return usuarioDao.getUsuarioPorId(id);
     }
+
+    @Override
+    public List<Usuario> getTodosAlunos() {
+        return usuarioDao.getTodosAlunos();
+    }
 }

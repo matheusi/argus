@@ -18,6 +18,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private Point point = new Point();
     
     private CoreFachada fachada;
+    private Usuario usuarioCorrente;
     
     public TelaLogin(CoreFachada fachada) {
         initComponents();
@@ -250,7 +251,8 @@ public class TelaLogin extends javax.swing.JFrame {
                 if (!usuairos.isEmpty()) {
                     usuairos.stream().forEach((f) -> {
                         if (f.getSenha().equals(Criptografar.encriptografar(jTextFieldSenha.getText())) && f.getLogin().equals(jTextFieldLogin.getText())) {                            
-                            TelaPrincipal telaPrincipal = new TelaPrincipal(fachada);
+                            usuarioCorrente = f;
+                            TelaPrincipal telaPrincipal = new TelaPrincipal(fachada, usuarioCorrente);
                             telaPrincipal.setVisible(true);
                             this.dispose();
                         } else {

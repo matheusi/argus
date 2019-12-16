@@ -1,5 +1,6 @@
 package br.com.pbd.view;
 
+import br.com.pbd.models.beans.Usuario;
 import java.awt.Color;
 import br.com.pbd.models.fachada.CoreFachada;
 import java.awt.Point;
@@ -7,10 +8,12 @@ import java.awt.Point;
 public class TelaPrincipal extends javax.swing.JFrame {
     private Point point = new Point();
     private CoreFachada fachada;
+    private Usuario usuarioCorrente;
     
-    public TelaPrincipal(CoreFachada fachada) {
+    public TelaPrincipal(CoreFachada fachada, Usuario usuarioCorrente) {
         initComponents();
         this.fachada = fachada;
+        this.usuarioCorrente = usuarioCorrente;
     }
     
     @SuppressWarnings("unchecked")
@@ -22,7 +25,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButtonUsuários = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
-        jButtonUsuários1 = new javax.swing.JButton();
+        jButtonAtendPedag = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("System32");
@@ -73,7 +76,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButtonUsuários.setBackground(new java.awt.Color(58, 65, 84));
         jButtonUsuários.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonUsuários.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonUsuários.setText("Usuários");
+        jButtonUsuários.setText("Cadastrar Pessoas");
         jButtonUsuários.setBorderPainted(false);
         jButtonUsuários.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonUsuários.setFocusPainted(false);
@@ -112,24 +115,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonUsuários1.setBackground(new java.awt.Color(58, 65, 84));
-        jButtonUsuários1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonUsuários1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonUsuários1.setText("Atendimento Pedagogico");
-        jButtonUsuários1.setBorderPainted(false);
-        jButtonUsuários1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonUsuários1.setFocusPainted(false);
-        jButtonUsuários1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtonAtendPedag.setBackground(new java.awt.Color(58, 65, 84));
+        jButtonAtendPedag.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonAtendPedag.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonAtendPedag.setText("Atendimento Pedagogico");
+        jButtonAtendPedag.setBorderPainted(false);
+        jButtonAtendPedag.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonAtendPedag.setFocusPainted(false);
+        jButtonAtendPedag.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButtonUsuários1MouseEntered(evt);
+                jButtonAtendPedagMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jButtonUsuários1MouseExited(evt);
+                jButtonAtendPedagMouseExited(evt);
             }
         });
-        jButtonUsuários1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtendPedag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonUsuários1ActionPerformed(evt);
+                jButtonAtendPedagActionPerformed(evt);
             }
         });
 
@@ -141,7 +144,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonUsuários, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonUsuários1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAtendPedag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -154,7 +157,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jButtonUsuários, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonUsuários1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAtendPedag, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(539, Short.MAX_VALUE))
         );
 
@@ -217,29 +220,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void jButtonUsuáriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsuáriosActionPerformed
-        CadastrarUsuario cadastroUsuario = new CadastrarUsuario(fachada);
+        CadastrarUsuario cadastroUsuario = new CadastrarUsuario(fachada, usuarioCorrente);
         cadastroUsuario.setVisible(true);
         this.dispose();
 
     }//GEN-LAST:event_jButtonUsuáriosActionPerformed
 
-    private void jButtonUsuários1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsuários1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonUsuários1MouseEntered
+    private void jButtonAtendPedagMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtendPedagMouseEntered
+        jButtonAtendPedag.setBackground(new Color(235,235,235));
+        jButtonAtendPedag.setForeground(new Color(58, 65, 84));
+    }//GEN-LAST:event_jButtonAtendPedagMouseEntered
 
-    private void jButtonUsuários1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUsuários1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonUsuários1MouseExited
+    private void jButtonAtendPedagMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtendPedagMouseExited
+       jButtonAtendPedag.setBackground(new Color(58,65,84));
+        jButtonAtendPedag.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jButtonAtendPedagMouseExited
 
-    private void jButtonUsuários1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsuários1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonUsuários1ActionPerformed
+    private void jButtonAtendPedagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtendPedagActionPerformed
+        CadastrarAtenPedag cadastrarAtenPedag = new CadastrarAtenPedag(fachada, usuarioCorrente);
+        cadastrarAtenPedag.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButtonAtendPedagActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtendPedag;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonUsuários;
-    private javax.swing.JButton jButtonUsuários1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

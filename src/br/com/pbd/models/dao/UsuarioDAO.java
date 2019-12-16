@@ -150,5 +150,23 @@ public class UsuarioDAO implements IcoreUsuarioDAO, Serializable {
             em.close();
         }
     }
+
+    @Override
+    public List<Usuario> getTodosAlunos() {
+        EntityManager em = getEntityManager();
+        List<Usuario> usuarios = null;
+      try{
+        String consulta = "select f from Usuario f where f.tipo like :nome";
+        TypedQuery<Usuario> query = em.createQuery(consulta,Usuario.class);
+        query.setParameter("nome","%" + "Aluno" + "%");
+        usuarios = query.getResultList();
+        
+      }catch (Exception e){
+          e.printStackTrace();
+      }finally{
+          em.close();
+      }
+        return usuarios;
+    }
     
 }

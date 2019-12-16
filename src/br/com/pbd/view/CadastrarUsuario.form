@@ -120,8 +120,18 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel11" min="-2" pref="61" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldSenha" min="-2" pref="152" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldSenha" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
+                                          <Component id="jLabel11" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jTextFieldNomePai" min="-2" pref="255" max="-2" attributes="0"/>
+                                          <Component id="jLabel18" min="-2" pref="83" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jTextFieldNomeMae" min="-2" pref="255" max="-2" attributes="0"/>
+                                          <Component id="jLabel19" min="-2" pref="80" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -141,9 +151,9 @@
                                           <Component id="jLabel14" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel15" min="-2" pref="61" max="-2" attributes="0"/>
-                                          <Component id="jFormattedTextFieldCPF" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jFormattedTextFieldCPF" max="32767" attributes="0"/>
+                                          <Component id="jLabel15" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -247,11 +257,15 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextFieldSenha" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jTextFieldLogin" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNomePai" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jTextFieldNomeMae" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -317,7 +331,7 @@
               <Color blue="63" green="5f" red="5b" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Cadastro de Usu&#xe1;rios"/>
+            <Property name="text" type="java.lang.String" value="Cadastro de Pessoas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSalvar">
@@ -492,22 +506,25 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxTipo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Administrador"/>
-                <StringItem index="1" value="Secret&#xe1;rio"/>
-                <StringItem index="2" value="Diretor"/>
-                <StringItem index="3" value="Pedagogo"/>
+              <StringArray count="5">
+                <StringItem index="0" value="Aluno"/>
+                <StringItem index="1" value="Administrador"/>
+                <StringItem index="2" value="Secret&#xe1;rio"/>
+                <StringItem index="3" value="Diretor"/>
+                <StringItem index="4" value="Pedagogo"/>
               </StringArray>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jComboBoxTipoMouseClicked"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jComboBoxTipoMousePressed"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jComboBoxTipoMouseReleased"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxTipoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF*"/>
+            <Property name="text" type="java.lang.String" value="CPF do Respons&#xe1;vel Financeiro"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -633,6 +650,26 @@
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="###.###.###-##" subtype="-1" type="5"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldNomePai">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNomePaiActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel18">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nome do Pai"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldNomeMae">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNomeMaeActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel19">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nome da M&#xe3;e"/>
           </Properties>
         </Component>
       </SubComponents>

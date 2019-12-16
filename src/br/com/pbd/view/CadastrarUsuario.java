@@ -33,8 +33,6 @@ public class CadastrarUsuario extends javax.swing.JFrame {
         this.fachada = fachada;
         preencherTabela();
         this.usuarioCorrente = usuarioCorrente;
-        jTextFieldLogin.setEnabled(false);
-        jTextFieldSenha.setEnabled(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -980,12 +978,7 @@ public class CadastrarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoMouseReleased
 
     private void jComboBoxTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxTipoMousePressed
-        if(usuarioCorrente.getTipo().equals("Administrador")){
-            camposLiberados();
-        }else{
-            jLabelNotificacao.setText("Você não pode cadastrar outro tipo!");
-            jComboBoxTipo.setSelectedIndex(0);
-        }
+
     }//GEN-LAST:event_jComboBoxTipoMousePressed
     
 

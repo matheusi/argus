@@ -8,7 +8,6 @@ import br.com.pbd.models.business.ModeloTabela;
 import br.com.pbd.models.dao.exceptions.NonexistentEntityException;
 import br.com.pbd.models.fachada.CoreFachada;
 import java.awt.Point;
-import static java.lang.Thread.sleep;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -667,38 +666,15 @@ public class CadastrarAtenPedag extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonSelecionarAlunoActionPerformed
     
-
-    public void loginInvalido(){
-        Point p = this.getLocation();
-        CadastrarAtenPedag telaLogin = this;
-        jLabelNotificacao.setText("Usuário ou senha inválidos!");
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    for (int i = 0; i < 5; i++) {
-                        telaLogin.setLocation(p.x - 10, p.y);
-                        sleep(20);
-                        telaLogin.setLocation(p.x + 10, p.y);
-                        sleep(20);
-                    }
-                    telaLogin.setLocation(p.x, p.y);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CadastrarAtenPedag.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }.start();
-    }
-    
     public void preencherTabela(){
         List<AtendimentoPedagogico> atendPedag = new ArrayList<>();
         ArrayList dados = new ArrayList();
-        String[] coluna = new String[]{"ID","STATUS","DATA","NOME DO PEDAGOGO","NOME DO ALUNO"};
+        String[] coluna = new String[]{"ID","STATUS","DATA"};
         
         atendPedag = fachada.getTodosAtendPedag();
 
         for (AtendimentoPedagogico atnPed : atendPedag){
-            dados.add(new Object[]{atnPed.getId(), atnPed.getStatus(), atnPed.getData(), atnPed.getPessoas().get(0).getNome(), atnPed.getPessoas().get(1).getNome()});
+            dados.add(new Object[]{atnPed.getId(), atnPed.getStatus(), atnPed.getData()});
         }
         
         ModeloTabela modelo = new ModeloTabela(dados, coluna);
@@ -709,10 +685,8 @@ public class CadastrarAtenPedag extends javax.swing.JFrame {
         JTableFiliais.getColumnModel().getColumn(1).setResizable(false);
         JTableFiliais.getColumnModel().getColumn(2).setPreferredWidth(275);
         JTableFiliais.getColumnModel().getColumn(2).setResizable(false);
-        JTableFiliais.getColumnModel().getColumn(3).setPreferredWidth(275);
-        JTableFiliais.getColumnModel().getColumn(3).setResizable(false);
-        JTableFiliais.getColumnModel().getColumn(4).setPreferredWidth(275);
-        JTableFiliais.getColumnModel().getColumn(4).setResizable(false);
+        JTableFiliais.getColumnModel().getColumn(2).setPreferredWidth(275);
+        JTableFiliais.getColumnModel().getColumn(2).setResizable(false);
         JTableFiliais.getTableHeader().setReorderingAllowed(false);
         JTableFiliais.setAutoResizeMode(JTableFiliais.AUTO_RESIZE_OFF);
         JTableFiliais.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
